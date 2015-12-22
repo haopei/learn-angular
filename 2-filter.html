@@ -1,0 +1,20 @@
+<!doctype HTML>
+
+<html ng-app>
+  <head>
+    <title>Filtering | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+  </head>
+
+  <!-- init a data set using ng-init -->
+  <body ng-init="users = [{name: 'Haopei', age: 28}, {name: 'Lee', age: 25}]">
+
+      <!-- create a ng-model and bind it with 'search' -->
+      <input type="text" ng-model="search">
+      <ul>
+        <!-- create a filter pipe named 'search' which binds to the ng-model -->
+        <li ng-repeat="u in users | filter:search">{{u.name}} - {{u.age}}</li>
+      </ul>
+
+  </body>
+</html>

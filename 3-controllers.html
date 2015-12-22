@@ -1,0 +1,33 @@
+<!doctype HTML>
+
+<html ng-app="userApp">
+  <head>
+    <title>Controllers | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+
+    <script>
+      angular.module('userApp', [])
+        .controller('userController', function($scope) {
+          $scope.users = [
+            {name: 'Haopei', age: 28},
+            {name: 'Lee', age: 25}
+          ];
+        })
+    </script>
+
+  </head>
+
+
+  <!-- declaring an ng-controller here means
+  that you can access the $scope object within this element -->
+  <body ng-controller="userController">
+
+      <input type="text" ng-model="search">
+      <ul>
+        <li ng-repeat="u in users | filter:search">{{u.name}} - {{u.age}}</li>
+      </ul>
+
+
+
+  </body>
+</html>

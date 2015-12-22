@@ -1,0 +1,60 @@
+<!doctype HTML>
+
+<html ng-app="userApp">
+  <head>
+    <title>Controllers | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+
+    <script>
+
+      // Instead of using $scope, we use 'userController=this'
+      //  so that we isolate the namespace we want to work with
+      //  This makes the code more readable and organized.
+      //  If we use scope, we won't know what controller we
+      //  are using, unless we check every time. This can be
+      //  chaotic for larger apps.
+
+      angular.module('userApp', [])
+        .controller('userController', function($scope) {
+
+          // 'this' refers to the controller.
+          var userController = this;
+          console.log(this);
+
+          userController.users = [
+            {name: 'Haopei', age: 28},
+            {name: 'Lee', age: 25}
+          ];
+
+          userController.addUser = function() {
+            // Retrieve values from the form via ng-submit
+            //   and push the values to the userController.users list
+            userController.users.push({
+              name: userController.name,
+              age: userController.age
+            })
+
+            // reset the form inputs
+            userController.name = '';
+            userController.age = 0;
+          };
+
+        })
+    </script>
+  </head>
+
+  <body ng-controller="userController as userController">
+
+    Search <input type="text" ng-model="search">
+    <ul>
+      <li ng-repeat="u in userController.users | filter:search">{{u.name}} - {{u.age}}</li>
+    </ul>
+
+    <form ng-submit="userController.addUser()">
+      <input type="text" ng-model="userController.name" placeholder="Name">
+      <input type="number" ng-model="userController.age" placeholder="Age">
+      <input type="submit" value="Submit">
+    </form>
+
+  </body>
+</html>

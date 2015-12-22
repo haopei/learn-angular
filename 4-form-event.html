@@ -1,0 +1,56 @@
+<!doctype HTML>
+
+<html ng-app="userApp">
+  <head>
+    <title>Controllers | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+
+    <script>
+      angular.module('userApp', [])
+        .controller('userController', function($scope) {
+
+          $scope.users = [
+            {name: 'Haopei', age: 28},
+            {name: 'Lee', age: 25}
+          ];
+
+          // define the addUser function within $scope
+          //   so that it is accessible within the document
+          $scope.addUser = function() {
+            // Retrieve values from the form via ng-submit
+            //   and push the values to the $scope.users list
+            $scope.users.push({
+              name: $scope.name,
+              age: $scope.age
+            })
+
+            // reset the form inputs
+            $scope.name = '';
+            $scope.age = 0;
+          };
+
+        })
+
+    </script>
+  </head>
+
+
+  <!-- declaring an ng-controller here means
+  that you can access the $scope object within this element -->
+  <body ng-controller="userController">
+
+      Search <input type="text" ng-model="search">
+      <ul>
+        <li ng-repeat="u in users | filter:search">{{u.name}} - {{u.age}}</li>
+      </ul>
+
+  <!-- bind the submit to the $scope.addUser() function -->
+  <form ng-submit="addUser()">
+    <!-- bind name and age for inputs -->
+    <input type="text" ng-model="name" placeholder="Name">
+    <input type="number" ng-model="age" placeholder="Age">
+    <input type="submit" value="Submit">
+  </form>
+
+  </body>
+</html>

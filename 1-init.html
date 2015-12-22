@@ -1,0 +1,21 @@
+<!doctype HTML>
+
+<!--
+  bootstrap the angular app,
+  the element within the ng-app scope will be treated as an angular app -->
+<html ng-app>
+  <head>
+    <title>Learn Angular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+  </head>
+
+  <!-- ng-init initializes some values into the html element -->
+  <body ng-init="users = [{name: 'Haopei', age: 28}, {name: 'Lee', age: 25}]">
+
+    <ul>
+      <!-- ng-repeat allows you to loop through the data -->
+      <li ng-repeat="u in users">{{u.name}} - {{u.age}}</li>
+    </ul>
+
+  </body>
+</html>
