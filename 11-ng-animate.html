@@ -1,0 +1,92 @@
+<!doctype HTML>
+
+<html ng-app="userApp">
+  <head>
+    <title>Controllers | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-animate.js"></script>
+
+    <script>
+
+      // Inject ngAnimate
+      angular.module('userApp', ['ngAnimate'])
+        .controller('userController', function($scope) {
+
+          var userController = this;
+          console.log(this);
+
+          userController.toggle = false;
+
+          userController.users = [
+            {name: 'Haopei', age: 28},
+            {name: 'Lee', age: 18},
+            {name: 'Mik', age: 16}
+
+          ];
+
+          userController.addUser = function() {
+            userController.users.push({
+              name: userController.name,
+              age: userController.age
+            })
+            userController.name = '';
+            userController.age = 0;
+          };
+
+        })
+    </script>
+    <style>
+      .over-twenty { color: red; }
+      .under-twenty { color: blue; }
+      .hidden {display: none;}
+
+      .ng-enter {
+        transition: 0.5s ease all;
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      .ng-enter.ng-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .ng-leave {
+        transition: 0.5s ease all;
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .ng-leave.ng-leave-active {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+
+    </style>
+  </head>
+
+  <body ng-controller="userController as userController">
+
+    <ul ng-if="userController.toggle">
+      <li
+        ng-repeat="u in userController.users"
+        ng-class="{ 'over-twenty': u.age > 20,
+                    'under-twenty': u.age < 20 }">
+          <ng-include src="'templates/10.1-users.html'"></ng-include>
+
+
+        </li>
+    </ul>
+
+    <button ng-if="!userController.toggle" ng-click="userController.toggle = true">Show Users</button>
+    <button ng-if="userController.toggle" ng-click="userController.toggle = false">Hide Users</button>
+
+    <form ng-submit="userController.addUser()">
+      <input type="text" ng-model="userController.name" placeholder="Name">
+      <input type="number" ng-model="userController.age" placeholder="Age">
+      <input type="submit" value="Submit">
+    </form>
+
+  </body>
+</html>

@@ -7,12 +7,8 @@
 
     <script>
 
-      // Instead of using $scope, we use 'userController=this'
-      //  so that we isolate the namespace we want to work with
-      //  This makes the code more readable and organized.
-      //  If we use scope, we won't know what controller we
-      //  are using, unless we check every time. This can be
-      //  chaotic for larger apps.
+      // Applying class to html elements
+      //   based on conditional statements
 
       angular.module('userApp', [])
         .controller('userController', function($scope) {
@@ -21,9 +17,13 @@
           var userController = this;
           console.log(this);
 
+          userController.toggle = false;
+
           userController.users = [
             {name: 'Haopei', age: 28},
-            {name: 'Lee', age: 25}
+            {name: 'Lee', age: 18},
+            {name: 'Mik', age: 16}
+
           ];
 
           userController.addUser = function() {
@@ -41,13 +41,39 @@
 
         })
     </script>
+    <style>
+      .over-twenty { color: red; }
+      .under-twenty { color: blue; }
+      .hidden {display: none;}
+    </style>
   </head>
 
   <body ng-controller="userController as userController">
 
-    Search <input type="text" ng-model="search">
+    <!--
+    apply the .over-twenty-five class if u.age is over 25.
+    Syntax: ng-class="{class_to_apply:condition}" -->
+    <ul ng-class="{'hidden' : !userController.toggle}">
+      <li
+        ng-repeat="u in userController.users"
+        ng-class="{ 'over-twenty': u.age > 20,
+                    'under-twenty': u.age < 20 }">
+          {{u.name}} - {{u.age}}
+        </li>
+    </ul>
+
+
+    <button ng-if="!userController.toggle" ng-click="userController.toggle = true">Show Users</button>
+    <button ng-if="userController.toggle" ng-click="userController.toggle = false">Hide Users</button>
+
+
+    <h4>Alternative method using ternary statements</h4>
     <ul>
-      <li ng-repeat="u in userController.users | filter:search">{{u.name}} - {{ u.age | currency:"&yen;":0 }}</li>
+      <li
+        ng-repeat="u in userController.users"
+        ng-class="u.age > 20 ? 'over-twenty' : 'under-twenty'">
+          {{u.name}} - {{u.age}}
+        </li>
     </ul>
 
     <form ng-submit="userController.addUser()">

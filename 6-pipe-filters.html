@@ -1,0 +1,31 @@
+<!doctype HTML>
+
+<html ng-app>
+  <head>
+    <title>Controllers | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+  </head>
+
+  <body ng-init="items={numbers: [1, 2, 3, 4, 5], animals: ['cat', 'dog', 'elephant']}">
+    <ul>
+      <h4>Currencies</h4>
+      <li ng-repeat="n in items.numbers | limitTo: 3">
+        {{ n | currency:"&yen;":0}}
+      </li>
+
+      <h4>Animals</h4>
+      <li ng-repeat="a in items.animals">{{a | uppercase}}</li>
+    </ul>
+
+    <hr>
+    <pre>
+      {{ items | json : 4 }}
+    </pre>
+
+    <hr>
+    {{1288323623006 | date:'medium'}} <br>
+    {{1288323623006 | date:'yyyy-MM-dd HH:mm:ss Z'}} <br>
+    {{1288323623006 | date:'MM/dd/yyyy @ h:mma'}} <br>
+    {{1288323623006 | date:"MM/dd/yyyy 'at' h:mma"}}
+  </body>
+</html>
