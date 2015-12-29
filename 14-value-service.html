@@ -1,0 +1,26 @@
+<!doctype HTML>
+
+<html ng-app="root">
+  <head>
+    <title>value service | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+
+    <!-- import service module to be injected as dependency -->
+    <script src="/services/14-value-service.js"></script>
+
+    <script>
+      // inject the greetingService service module from /services/14-value-service.js
+      angular.module("root", ["greetingService"])
+        // include greeting value (from greetingServices module) in controller
+        .controller("index", ["$scope", "greeting", function($scope, greeting) {
+
+          // Make it a value within scope so the template can use this value.
+          $scope.greeting = greeting;
+        }]);
+    </script>
+  </head>
+
+  <body ng-controller="index">
+    {{greeting}}
+  </body>
+</html>

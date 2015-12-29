@@ -1,0 +1,28 @@
+<!doctype HTML>
+
+<html ng-app="root">
+  <head>
+    <title>Service Recipe | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+
+    <!-- 1. import 'services' module -->
+    <script src="/services/16-services-recipe.js"></script>
+
+    <script>
+      // 2 inject services dependency
+      angular.module("root", ["services"])
+        // 3. include 'adder' service from 'services' module
+        .controller("index", ["$scope", "adder",
+            function ($scope, adder) {
+              // 4. the adder service uses the Adder constructor function which has a .add() method,
+              //    which in turn takes a number as parameter. The initial number 6 is provided by the
+              //    value recipe.
+              $scope.sum = adder.add(4);  // >> 10
+            }]);
+    </script>
+  </head>
+
+  <body ng-controller="index">
+  {{sum}}
+  </body>
+</html>

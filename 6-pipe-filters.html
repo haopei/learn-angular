@@ -9,7 +9,7 @@
   <body ng-init="items={numbers: [1, 2, 3, 4, 5], animals: ['cat', 'dog', 'elephant']}">
     <ul>
       <h4>Currencies</h4>
-      <li ng-repeat="n in items.numbers | limitTo: 3">
+      <li ng-repeat="n in items.numbers | limitTo: 3" ng-class="{'custom-class': $even}">
         {{ n | currency:"&yen;":0}}
       </li>
 

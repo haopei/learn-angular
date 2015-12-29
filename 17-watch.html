@@ -1,0 +1,33 @@
+<!doctype HTML>
+
+<html ng-app="root">
+  <head>
+    <title>$watch | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+
+    <script>
+      angular.module("root", [])
+        .controller("index", ["$scope", function ($scope) {
+
+          // by default, scope.product will not be updated
+          // because its value is not initialized throughout the function's execution.
+          // It is instead initialized through $scope.number * 2
+          // So, we need to watch for the number to change and update the product's value.
+          $scope.$watch("number", function (number) {
+            $scope.product = number * 2;
+          })
+          $scope.number = 6;
+          $scope.product = $scope.number * 2
+        }])
+    </script>
+
+  </head>
+
+  <body ng-controller="index">
+    <strong>{{number}}</strong> x 2 = {{product}}
+  </body>
+  <br>
+
+  times <input type="text" ng-model="number">
+</html>
+

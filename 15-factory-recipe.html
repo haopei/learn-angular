@@ -1,0 +1,23 @@
+<!doctype HTML>
+
+<html ng-app="root">
+  <head>
+    <title>value service | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+    <script src="/services/15-factory-recipe.js"></script>
+
+    <script>
+      angular.module("root", ["services"])
+        // inject square factory from services module inside 15-factory-recipe.js
+        .controller("index", ["$scope", "square",
+            function ($scope, square) {
+              $scope.product = square;
+              console.log(arguments);
+        }]);
+    </script>
+  </head>
+
+  <body ng-controller="index">
+  {{product}}
+  </body>
+</html>

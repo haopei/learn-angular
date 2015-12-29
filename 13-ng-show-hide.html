@@ -1,0 +1,36 @@
+<!doctype HTML>
+
+<html ng-app="root">
+  <head>
+    <title>ng-hide-show | LearnAngular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+
+    <script>
+      angular.module("root", [])
+        .controller("index", ["$scope", function($scope) {
+          $scope.isFirstElementVisible = true;
+          $scope.isSecondElementVisible = true;
+        }]);
+    </script>
+  </head>
+
+  <body ng-controller="index">
+
+    <div>
+      <input type="checkbox" ng-model="isFirstElementVisible" /> Is first element visible
+    </div>
+
+    <div>
+      <input type="checkbox" ng-model="isSecondElementVisible" /> Is second element visible
+    </div>
+
+
+
+    <!-- applies ng-hide class (display_none !important) to element if ng-show is false -->
+    <div ng-show="isFirstElementVisible">First Element</div>
+
+    <!-- removes element from DOM if ng-if value is false -->
+    <div ng-if="isSecondElementVisible">Second Element</div>
+
+  </body>
+</html>
